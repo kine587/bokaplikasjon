@@ -5,7 +5,6 @@ import Header from "./Components/Header.jsx";
 function App() {
   return (
     <>
-      <h1>Hei</h1>
       <Header />
       <main>
         <Outlet />

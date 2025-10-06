@@ -5,6 +5,12 @@ import BookList from "../Components/BookList.jsx";
 export default function Home() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("favorites")) || [];
+    setFavorites(stored);
+  }, []);
 
   useEffect(() => {
     async function loadBooks() {
@@ -36,7 +42,11 @@ export default function Home() {
       {loading ? (
         <p>Loading books...</p>
       ) : (
-        <BookList books={books} onAddFavorites={addFavorites} />
+        <BookList
+          books={books}
+          onAddFavorites={addFavorites}
+          favoriteBooks={favorites}
+        />
       )}
     </>
   );

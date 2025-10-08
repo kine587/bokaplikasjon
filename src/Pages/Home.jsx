@@ -1,22 +1,19 @@
 import { useState, useEffect } from "react";
-import { FetchBooks } from "../ApiData/API.js";
+import { FetchBooks, SearchBooks } from "../ApiData/API.js";
 import BookList from "../Components/BookList.jsx";
+import { useSearchParams } from "react-router-dom";
 
 export default function Home() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [favorites, setFavorites] = useState([]);
-
-  useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("favorites")) || [];
-    setFavorites(stored);
-  }, []);
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get("search") || "";
 
   useEffect(() => {
     async function loadBooks() {
       try {
         setLoading(true);
-        const data = await FetchBooks();
+        const data = search ? await SearchBooks(search) : await FetchBooks();
         setBooks(data.results);
       } catch (error) {
         console.error("Failed to fetch books:", error);
@@ -25,7 +22,7 @@ export default function Home() {
       }
     }
     loadBooks();
-  }, []);
+  }, [search]);
 
   function addFavorites(book) {
     const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -42,11 +39,7 @@ export default function Home() {
       {loading ? (
         <p>Loading books...</p>
       ) : (
-        <BookList
-          books={books}
-          onAddFavorites={addFavorites}
-          favoriteBooks={favorites}
-        />
+        <BookList books={books} onAddFavorites={addFavorites} />
       )}
     </>
   );

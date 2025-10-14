@@ -87,7 +87,7 @@ export default function Header() {
             >
               Søk
             </Button>
-            <Box sx={{ flexGrow: 1 }} />
+            {/* <Box sx={{ flexGrow: 1 }} /> */}
             <Button
               component={Link}
               to="/Favorites"

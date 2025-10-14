@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Box, Button } from "@mui/material";
 
 export default function CategoryMenu() {
   const categories = [
@@ -19,13 +20,30 @@ export default function CategoryMenu() {
 
   return (
     <>
-      <ul>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          flexWrap: "wrap",
+          gap: 2,
+        }}
+      >
         {categories.map((cat) => (
-          <li key={cat}>
-            <Link to={`/category/${cat.toLowerCase()}`}>{cat}</Link>
-          </li>
+          <Button
+            key={cat}
+            component={Link}
+            to={`/category/${cat.toLowerCase()}`}
+            variant="text"
+            sx={{
+              color: "#b944d0ff",
+              textTransform: "none",
+              "&:hover": { color: "#822794ff" },
+            }}
+          >
+            {cat}
+          </Button>
         ))}
-      </ul>
+      </Box>
     </>
   );
 }

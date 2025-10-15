@@ -76,11 +76,21 @@ export default function Favorites() {
         >
           My favorites
         </Typography>
-        <BookList
-          books={favorites}
-          onRemoveFavorites={removeFavorite}
-          favoriteBooks={favorites}
-        />
+        {favorites.length === 0 ? (
+          <Typography
+            variant="subtitle1"
+            align="center"
+            sx={{ color: "#b944d0ff" }}
+          >
+            No favorites yet
+          </Typography>
+        ) : (
+          <BookList
+            books={favorites}
+            onRemoveFavorite={removeFavorite}
+            favoriteBooks={favorites}
+          />
+        )}
       </Box>
     </>
   );

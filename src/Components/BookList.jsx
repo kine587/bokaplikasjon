@@ -4,7 +4,7 @@ import { Grid, Typography } from "@mui/material";
 export default function BookList({
   books,
   onAddFavorites,
-  onRemoveFavorites,
+  onRemoveFavorite,
   favoriteBooks,
 }) {
   if (!books || books.lenght === 0) {
@@ -21,8 +21,8 @@ export default function BookList({
         <Grid key={book.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
           <BookCard
             book={book}
-            onAddFavorites={onAddFavorites}
-            onRemoveFavorites={onRemoveFavorites}
+            onAddFavorite={onAddFavorites}
+            onRemoveFavorite={onRemoveFavorite}
             favoriteBooks={favoriteBooks}
           />
         </Grid>

@@ -90,7 +90,7 @@ export default function BookCard({
         <Box
           sx={{
             display: "flex",
-            gap: 1,
+            gap: 2,
             p: 2,
           }}
         >

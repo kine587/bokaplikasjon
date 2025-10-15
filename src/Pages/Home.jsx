@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { FetchBooks, SearchBooks } from "../ApiData/API.js";
 import BookList from "../Components/BookList.jsx";
 import { useSearchParams } from "react-router-dom";
-import { Box, Typography, CircularProgress, Container } from "@mui/material";
+import { Box, Typography, CircularProgress, Pagination } from "@mui/material";
 
 export default function Home() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [searchParams] = useSearchParams();
   const search = searchParams.get("search") || "";
 
@@ -14,8 +16,14 @@ export default function Home() {
     async function loadBooks() {
       try {
         setLoading(true);
-        const data = search ? await SearchBooks(search) : await FetchBooks();
+        let data;
+        if (search) {
+          data = await SearchBooks(search, page);
+        } else {
+          data = await FetchBooks(page);
+        }
         setBooks(data.results);
+        setTotalPages(Math.ceil(data.count / 32));
       } catch (error) {
         console.error("Failed to fetch books:", error);
       } finally {
@@ -23,7 +31,7 @@ export default function Home() {
       }
     }
     loadBooks();
-  }, [search]);
+  }, [page, search]);
 
   function addFavorites(book) {
     const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -88,14 +96,24 @@ export default function Home() {
             <BookList books={books} onAddFavorites={addFavorites} />
           </Box>
         )}
+        <Box display="flex" justifyContent="center" mt={4}>
+          <Pagination
+            count={totalPages}
+            page={page}
+            onChange={(e, value) => setPage(value)}
+            color="primary"
+            sx={{
+              "& .MuiPaginationItem-root": {
+                color: "#b944d0ff",
+                "&.Mui-selected": {
+                  bgcolor: "#b944d0ff",
+                  color: "#fff",
+                },
+              },
+            }}
+          />
+        </Box>
       </Box>
-      {/* <h1>Welcome to Gutendex Library</h1>
-
-      {loading ? (
-        <p>Loading books...</p>
-      ) : (
-        <BookList books={books} onAddFavorites={addFavorites} />
-      )} */}
     </>
   );
 }

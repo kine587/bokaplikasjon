@@ -5,9 +5,9 @@ export async function FetchBooks(page = 1) {
   return response.json();
 }
 
-export async function SearchBooks(search) {
+export async function SearchBooks(search, page = 1) {
   const response = await fetch(
-    `${API_URL}?search=${encodeURIComponent(search)}`
+    `${API_URL}/?search=${encodeURIComponent(search)}&page=${page}`
   );
   return response.json();
 }

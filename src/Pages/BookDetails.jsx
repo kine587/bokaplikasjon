@@ -84,7 +84,7 @@ export default function BookDetails() {
     <>
       <Box
         sx={{
-          bgcolor: "121212",
+          bgcolor: "#121212",
           color: "white",
           minHeight: "100vh",
           alignItems: "center",
@@ -97,8 +97,8 @@ export default function BookDetails() {
             color: "white",
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
-            maxWidth: "1400px",
-            width: "100vw",
+            width: { xs: "90%", md: "70%", lg: "50%" },
+            //            width: "100vw",
             minHeight: "85vh",
             borderRadius: 3,
             boxShadow: "none",
@@ -112,7 +112,7 @@ export default function BookDetails() {
               alt={book.title}
               sx={{
                 width: { xs: "100%", md: "30%" },
-                height: "auto",
+                //height: "auto",
                 objectFit: "cover",
               }}
             />

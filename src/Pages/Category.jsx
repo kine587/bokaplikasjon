@@ -47,7 +47,7 @@ export default function Category() {
           py: 6,
           px: 4,
           minHeight: "100vh",
-          width: "100vW",
+          //width: "100vW",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",

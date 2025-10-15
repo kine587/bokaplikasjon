@@ -25,11 +25,14 @@ export default function Header() {
   return (
     <>
       <AppBar
-        position="static"
+        position="sticky"
         sx={{
+          top: 0,
+          zIndex: 1100,
           backgroundColor: "#0a0a0aff",
           py: 2,
           alignItems: "center",
+          boxShadow: "0px 2px 8px rgba(0,0,0,0.4)",
         }}
       >
         <Toolbar
@@ -41,11 +44,11 @@ export default function Header() {
           }}
         >
           <Typography
-            variant="h1"
+            variant="h6"
             component={Link}
             to="/"
             sx={{
-              color: "#949e9fff",
+              color: "#b349cff",
               textDecoration: "none",
               fontWeight: "bold",
               textAlign: "center",
@@ -113,24 +116,6 @@ export default function Header() {
           </Box>
         </Toolbar>
       </AppBar>
-      {/* <header>
-        <h1>
-          <Link to="/">BookApp</Link>
-        </h1>
-        <form onSubmit={handleSearch}>
-          <input
-            type="text"
-            placeholder="Søk etter bøker..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <button type="submit">Søk</button>
-        </form>
-        <nav>
-          <Link to="/Favorites">Favorites</Link>
-          <CategoryMeny />
-        </nav>
-      </header> */}
     </>
   );
 }

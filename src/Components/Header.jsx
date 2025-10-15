@@ -48,7 +48,7 @@ export default function Header() {
             component={Link}
             to="/"
             sx={{
-              color: "#b349cff",
+              color: "#b944d0ff",
               textDecoration: "none",
               fontWeight: "bold",
               textAlign: "center",

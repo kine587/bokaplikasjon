@@ -87,7 +87,9 @@ export default function BookDetails() {
           bgcolor: "#121212",
           color: "white",
           minHeight: "100vh",
-          alignItems: "center",
+          display: "flex",
+          justifyContent: "center",
+          //alignItems: "center",
           px: 6,
         }}
       >
@@ -99,7 +101,7 @@ export default function BookDetails() {
             flexDirection: { xs: "column", md: "row" },
             width: { xs: "90%", md: "70%", lg: "50%" },
             //            width: "100vw",
-            minHeight: "85vh",
+            maxHeight: "55vh",
             borderRadius: 3,
             boxShadow: "none",
             overflow: "hidden",
@@ -112,7 +114,7 @@ export default function BookDetails() {
               alt={book.title}
               sx={{
                 width: { xs: "100%", md: "30%" },
-                //height: "auto",
+                height: "auto",
                 objectFit: "cover",
               }}
             />

@@ -120,7 +120,7 @@ export default function BookCard({
               sx={{
                 borderColor: "#b944d0ff",
                 color: "#b944d0ff",
-                "&hover": { bgcolor: "#b944d020" },
+                "&hover": { bgcolor: "#7c3188ff" },
                 flex: 1,
               }}
             >
@@ -134,7 +134,7 @@ export default function BookCard({
               onClick={() => onRemoveFavorite(book.id)}
               sx={{
                 bgcolor: "#b944d0ff",
-                color: "#b944d0ff",
+                color: "white",
                 "&hover": { bgcolor: "#b944d020" },
                 flex: 1,
               }}

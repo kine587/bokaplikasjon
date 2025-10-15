@@ -80,7 +80,7 @@ export default function Favorites() {
           <Typography
             variant="subtitle1"
             align="center"
-            sx={{ color: "#b944d0ff" }}
+            sx={{ bgColor: "#b944d0ff", color: "white" }}
           >
             No favorites yet
           </Typography>

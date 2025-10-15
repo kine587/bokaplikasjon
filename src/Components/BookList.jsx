@@ -3,8 +3,9 @@ import { Grid, Box } from "@mui/material";
 
 export default function BookList({
   books,
-  /* onAddFavorites,
-  favoriteBooks = [], */
+  onAddFavorites,
+  onRemoveFavorites,
+  favoriteBooks,
 }) {
   if (!books || books.lenght === 0) {
     return <p>No books found</p>;
@@ -16,7 +17,12 @@ export default function BookList({
         <Grid container spacing={2} justifyContent="center">
           {books.map((book) => (
             <Grid key={book.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-              <BookCard book={book} />
+              <BookCard
+                book={book}
+                onAddFavorites={onAddFavorites}
+                onRemoveFavorites={onRemoveFavorites}
+                favoriteBooks={favoriteBooks}
+              />
             </Grid>
           ))}
         </Grid>

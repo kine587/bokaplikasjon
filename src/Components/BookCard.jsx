@@ -5,13 +5,17 @@ import {
   CardMedia,
   Typography,
   Button,
+  Box,
 } from "@mui/material";
 
-export default function BookCard({ book /* favoriteBooks = [] */ }) {
-  /* const isFavorite = favoriteBooks.some((b) => b.id === book.id); */
+export default function BookCard({
+  book,
+  onAddFavorite,
+  onRemoveFavorite,
+  isFavorite,
+}) {
   const cover = book.formats["image/jpeg"];
   const title = book.title;
-  /* const author = book.author?.[0]?.name; */
 
   return (
     <div>
@@ -49,9 +53,12 @@ export default function BookCard({ book /* favoriteBooks = [] */ }) {
             width: 250,
             padding: "8px 12px",
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             textAlign: "center",
+            px: 2,
+            py: 1,
           }}
         >
           <Typography
@@ -59,6 +66,7 @@ export default function BookCard({ book /* favoriteBooks = [] */ }) {
             sx={{
               fontSize: "1rem",
               lineHeight: 1.2,
+              mb: 1,
               overflow: "hidden",
               textOverflow: "ellipsis",
               display: "-webkit-box",
@@ -68,24 +76,73 @@ export default function BookCard({ book /* favoriteBooks = [] */ }) {
           >
             {title}
           </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              color: "#bdbdbd",
+            }}
+          >
+            {book.authors?.length
+              ? book.authors.map((a) => a.name).join(", ")
+              : "unknown autor"}
+          </Typography>
         </CardContent>
-        <Button
-          component={Link}
-          to={`/book/${book.id}`}
-          variant="contained"
-          size="small"
+        <Box
           sx={{
-            bgcolor: "#9c3aa3ff",
-            "&:hover": { bgcolor: "#7c3188ff" },
-            borderRadius: "0 0 8px 8px",
-            fontSize: "0.75rem",
-            padding: "4px 10px",
-            minWidth: "auto",
-            mb: 1,
+            display: "flex",
+            gap: 1,
+            p: 2,
           }}
         >
-          Details
-        </Button>
+          <Button
+            component={Link}
+            to={`/book/${book.id}`}
+            variant="contained"
+            size="small"
+            sx={{
+              bgcolor: "#9c3aa3ff",
+              "&:hover": { bgcolor: "#7c3188ff" },
+              borderRadius: "0 0 8px 8px",
+              fontSize: "0.75rem",
+              padding: "4px 10px",
+              minWidth: "auto",
+              mb: 1,
+            }}
+          >
+            Details
+          </Button>
+          {onAddFavorite && (
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={() => onAddFavorite(book)}
+              disabled={isFavorite}
+              sx={{
+                borderColor: "#b944d0ff",
+                color: "#b944d0ff",
+                "&hover": { bgcolor: "#b944d020" },
+                flex: 1,
+              }}
+            >
+              {isFavorite ? "Added" : "Favorite"}
+            </Button>
+          )}
+          {onRemoveFavorite && (
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={() => onRemoveFavorite(book.id)}
+              sx={{
+                bgcolor: "#b944d0ff",
+                color: "#b944d0ff",
+                "&hover": { bgcolor: "#b944d020" },
+                flex: 1,
+              }}
+            >
+              Remove
+            </Button>
+          )}
+        </Box>
       </Card>
     </div>
   );

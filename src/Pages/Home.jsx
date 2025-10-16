@@ -58,66 +58,64 @@ export default function Home() {
     );
 
   return (
-    <>
-      <Box
+    <Box
+      sx={{
+        // width: "100vw",
+        minHeight: "100vh",
+        px: 4,
+        py: 6,
+        bgcolor: "#121212",
+        color: "white",
+      }}
+    >
+      <Typography
+        variant="h3"
+        align="center"
+        gutterBottom
         sx={{
-          // width: "100vw",
-          minHeight: "100vh",
-          px: 4,
-          py: 6,
-          bgcolor: "#121212",
-          color: "white",
+          color: "#b349cff",
+          fontWeight: "bold",
         }}
       >
+        Welcome to Gutendex Library
+      </Typography>
+      {books.length === 0 ? (
         <Typography
-          variant="h3"
+          variant="subtitle1"
           align="center"
-          gutterBottom
           sx={{
-            color: "#b349cff",
-            fontWeight: "bold",
+            color: "#bdbdbd",
           }}
         >
-          Welcome to Gutendex Library
+          No books found
         </Typography>
-        {books.length === 0 ? (
-          <Typography
-            variant="subtitle1"
-            align="center"
-            sx={{
-              color: "#bdbdbd",
-            }}
-          >
-            No books found
-          </Typography>
-        ) : (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <BookList books={books} onAddFavorites={addFavorites} />
-          </Box>
-        )}
-        <Box display="flex" justifyContent="center" mt={4}>
-          <Pagination
-            count={totalPages}
-            page={page}
-            onChange={(e, value) => setPage(value)}
-            color="primary"
-            sx={{
-              "& .MuiPaginationItem-root": {
-                color: "#b944d0ff",
-                "&.Mui-selected": {
-                  bgcolor: "#b944d0ff",
-                  color: "#fff",
-                },
-              },
-            }}
-          />
+      ) : (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <BookList books={books} onAddFavorites={addFavorites} />
         </Box>
+      )}
+      <Box display="flex" justifyContent="center" mt={4}>
+        <Pagination
+          count={totalPages}
+          page={page}
+          onChange={(e, value) => setPage(value)}
+          color="primary"
+          sx={{
+            "& .MuiPaginationItem-root": {
+              color: "#b944d0ff",
+              "&.Mui-selected": {
+                bgcolor: "#b944d0ff",
+                color: "#fff",
+              },
+            },
+          }}
+        />
       </Box>
-    </>
+    </Box>
   );
 }

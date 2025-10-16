@@ -46,76 +46,74 @@ export default function Category() {
   }
 
   return (
-    <>
-      <Box
+    <Box
+      sx={{
+        bgcolor: "#121212",
+        color: "white",
+        py: 6,
+        px: 4,
+        minHeight: "100vh",
+        //width: "100vW",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <Typography
+        variant="h4"
+        align="center"
+        gutterBottom
         sx={{
-          bgcolor: "#121212",
-          color: "white",
-          py: 6,
-          px: 4,
-          minHeight: "100vh",
-          //width: "100vW",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          fontWeight: "bold",
+          color: "#b944d0ff",
+          textShadow: "0px 0px 8px rgba(185, 68, 208, 0.5)",
         }}
       >
-        <Typography
-          variant="h4"
-          align="center"
-          gutterBottom
+        {categoryName
+          ? categoryName.charAt(0).toUpperCase() + categoryName.slice(1)
+          : "Category Books"}
+      </Typography>
+      {loading ? (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          sx={{ flexGrow: 1 }}
+        >
+          <CircularProgress sx={{ color: "#b944d0ff" }} />
+        </Box>
+      ) : (
+        <Box
           sx={{
-            fontWeight: "bold",
-            color: "#b944d0ff",
-            textShadow: "0px 0px 8px rgba(185, 68, 208, 0.5)",
+            mt: 4,
+            width: "100%",
+            maxWidth: "1400px",
           }}
         >
-          {categoryName
-            ? categoryName.charAt(0).toUpperCase() + categoryName.slice(1)
-            : "Category Books"}
-        </Typography>
-        {loading ? (
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            sx={{ flexGrow: 1 }}
-          >
-            <CircularProgress sx={{ color: "#b944d0ff" }} />
-          </Box>
-        ) : (
-          <Box
-            sx={{
-              mt: 4,
-              width: "100%",
-              maxWidth: "1400px",
-            }}
-          >
-            <BookList
-              books={books}
-              onAddFavorites={addFavorite}
-              favoriteBooks={favorite}
-            />
-          </Box>
-        )}
-        <Box display="flex" justifyContent="center" mt={4}>
-          <Pagination
-            count={totalPages}
-            page={page}
-            onChange={(e, value) => setPage(value)}
-            color="primary"
-            sx={{
-              "& .MuiPaginationItem-root": {
-                color: "#b944d0ff",
-                "&.Mui-selected": {
-                  bgcolor: "#b944d0ff",
-                  color: "#fff",
-                },
-              },
-            }}
+          <BookList
+            books={books}
+            onAddFavorites={addFavorite}
+            favoriteBooks={favorite}
           />
         </Box>
+      )}
+      <Box display="flex" justifyContent="center" mt={4}>
+        <Pagination
+          count={totalPages}
+          page={page}
+          onChange={(e, value) => setPage(value)}
+          color="primary"
+          sx={{
+            "& .MuiPaginationItem-root": {
+              color: "#b944d0ff",
+              "&.Mui-selected": {
+                bgcolor: "#b944d0ff",
+                color: "#fff",
+              },
+            },
+          }}
+        />
       </Box>
-    </>
+    </Box>
   );
 }

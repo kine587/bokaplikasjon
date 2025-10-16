@@ -19,31 +19,29 @@ export default function CategoryMenu() {
   ];
 
   return (
-    <>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          flexWrap: "wrap",
-          gap: 2,
-        }}
-      >
-        {categories.map((cat) => (
-          <Button
-            key={cat}
-            component={Link}
-            to={`/category/${cat.toLowerCase()}`}
-            variant="text"
-            sx={{
-              color: "#b944d0ff",
-              textTransform: "none",
-              "&:hover": { color: "#822794ff" },
-            }}
-          >
-            {cat}
-          </Button>
-        ))}
-      </Box>
-    </>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        gap: 2,
+      }}
+    >
+      {categories.map((cat) => (
+        <Button
+          key={cat}
+          component={Link}
+          to={`/category/${cat.toLowerCase()}`}
+          variant="text"
+          sx={{
+            color: "#b944d0ff",
+            textTransform: "none",
+            "&:hover": { color: "#822794ff" },
+          }}
+        >
+          {cat}
+        </Button>
+      ))}
+    </Box>
   );
 }

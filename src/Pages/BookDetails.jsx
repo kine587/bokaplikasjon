@@ -81,129 +81,127 @@ export default function BookDetails() {
   )?.[1];
 
   return (
-    <>
-      <Box
+    <Box
+      sx={{
+        bgcolor: "#121212",
+        color: "white",
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        //alignItems: "center",
+        px: 6,
+      }}
+    >
+      <Card
         sx={{
-          bgcolor: "#121212",
+          bgcolor: "#1e1e1e",
           color: "white",
-          minHeight: "100vh",
           display: "flex",
-          justifyContent: "center",
-          //alignItems: "center",
-          px: 6,
+          flexDirection: { xs: "column", md: "row" },
+          width: { xs: "90%", md: "70%", lg: "50%" },
+          //            width: "100vw",
+          maxHeight: "55vh",
+          borderRadius: 3,
+          boxShadow: "none",
+          overflow: "hidden",
         }}
       >
-        <Card
+        {cover && (
+          <CardMedia
+            component="img"
+            image={cover}
+            alt={book.title}
+            sx={{
+              width: { xs: "100%", md: "30%" },
+              height: "auto",
+              objectFit: "cover",
+            }}
+          />
+        )}
+        <CardContent
           sx={{
-            bgcolor: "#1e1e1e",
-            color: "white",
+            flex: 1,
+            p: { xs: 3, md: 6 },
             display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            width: { xs: "90%", md: "70%", lg: "50%" },
-            //            width: "100vw",
-            maxHeight: "55vh",
-            borderRadius: 3,
-            boxShadow: "none",
-            overflow: "hidden",
+            flexDirection: "column",
+            justifyContent: "center",
+            gap: 2,
+            maxWidth: "1400px",
           }}
         >
-          {cover && (
-            <CardMedia
-              component="img"
-              image={cover}
-              alt={book.title}
-              sx={{
-                width: { xs: "100%", md: "30%" },
-                height: "auto",
-                objectFit: "cover",
-              }}
-            />
-          )}
-          <CardContent
+          <Typography
+            variant="h4"
             sx={{
-              flex: 1,
-              p: { xs: 3, md: 6 },
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              gap: 2,
-              maxWidth: "1400px",
+              color: "#b944d0ff",
             }}
           >
-            <Typography
-              variant="h4"
+            {book.title}
+          </Typography>
+
+          <Typography
+            variant="subtitle1"
+            sx={{
+              color: "#bdbdbd",
+            }}
+          >
+            {book.authors?.length ? book.authors[0].name : "unknown author"}
+          </Typography>
+
+          <Typography variant="body1">
+            Languages: {book.languages.join(", ")}
+          </Typography>
+          <Typography variant="body1">
+            Downloads: {book.download_count.toLocaleString()}
+          </Typography>
+
+          {readLink && (
+            <Button
+              variant="contained"
+              href={readLink}
+              target="_Blank"
+              rel="noopener noreferrer"
+              sx={{
+                bgcolor: "#b944d0ff",
+                "&:hover": { bgcolor: "#8a35a0" },
+              }}
+            >
+              Read online
+            </Button>
+          )}
+          <Box
+            sx={{
+              display: "flex",
+              gap: 2,
+              mt: 3,
+            }}
+          >
+            <Button
+              variant="outlined"
+              onClick={() => addFavorite(book)}
+              sx={{
+                borderColor: "#b944d0ff",
+                color: "#b944d0ff",
+                "&hover": {
+                  bgcolor: "#b944d20",
+                  borderColor: "#b944d0ff",
+                },
+              }}
+            >
+              Add to favorite
+            </Button>
+            <Button
+              variant="text"
+              onClick={() => navigate(-1)}
               sx={{
                 color: "#b944d0ff",
+                "&hover": { textDecoration: "none" },
               }}
             >
-              {book.title}
-            </Typography>
-
-            <Typography
-              variant="subtitle1"
-              sx={{
-                color: "#bdbdbd",
-              }}
-            >
-              {book.authors?.length ? book.authors[0].name : "unknown author"}
-            </Typography>
-
-            <Typography variant="body1">
-              Languages: {book.languages.join(", ")}
-            </Typography>
-            <Typography variant="body1">
-              Downloads: {book.download_count.toLocaleString()}
-            </Typography>
-
-            {readLink && (
-              <Button
-                variant="contained"
-                href={readLink}
-                target="_Blank"
-                rel="noopener noreferrer"
-                sx={{
-                  bgcolor: "#b944d0ff",
-                  "&:hover": { bgcolor: "#8a35a0" },
-                }}
-              >
-                Read online
-              </Button>
-            )}
-            <Box
-              sx={{
-                display: "flex",
-                gap: 2,
-                mt: 3,
-              }}
-            >
-              <Button
-                variant="outlined"
-                onClick={() => addFavorite(book)}
-                sx={{
-                  borderColor: "#b944d0ff",
-                  color: "#b944d0ff",
-                  "&hover": {
-                    bgcolor: "#b944d20",
-                    borderColor: "#b944d0ff",
-                  },
-                }}
-              >
-                Add to favorite
-              </Button>
-              <Button
-                variant="text"
-                onClick={() => navigate(-1)}
-                sx={{
-                  color: "#b944d0ff",
-                  "&hover": { textDecoration: "none" },
-                }}
-              >
-                Back
-              </Button>
-            </Box>
-          </CardContent>
-        </Card>
-      </Box>
-    </>
+              Back
+            </Button>
+          </Box>
+        </CardContent>
+      </Card>
+    </Box>
   );
 }

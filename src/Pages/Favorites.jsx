@@ -56,42 +56,40 @@ export default function Favorites() {
   }
 
   return (
-    <>
-      <Box
+    <Box
+      sx={{
+        bgcolor: "#121212",
+        color: "white",
+        minHeight: "100vh",
+        py: 6,
+        px: 3,
+      }}
+    >
+      <Typography
+        variant="h3"
+        align="center"
         sx={{
-          bgcolor: "#121212",
-          color: "white",
-          minHeight: "100vh",
-          py: 6,
-          px: 3,
+          mb: 4,
+          color: "#b944d0ff",
         }}
       >
+        My favorites
+      </Typography>
+      {favorites.length === 0 ? (
         <Typography
-          variant="h3"
+          variant="subtitle1"
           align="center"
-          sx={{
-            mb: 4,
-            color: "#b944d0ff",
-          }}
+          sx={{ bgColor: "#b944d0ff", color: "white" }}
         >
-          My favorites
+          No favorites yet
         </Typography>
-        {favorites.length === 0 ? (
-          <Typography
-            variant="subtitle1"
-            align="center"
-            sx={{ bgColor: "#b944d0ff", color: "white" }}
-          >
-            No favorites yet
-          </Typography>
-        ) : (
-          <BookList
-            books={favorites}
-            onRemoveFavorite={removeFavorite}
-            favoriteBooks={favorites}
-          />
-        )}
-      </Box>
-    </>
+      ) : (
+        <BookList
+          books={favorites}
+          onRemoveFavorite={removeFavorite}
+          favoriteBooks={favorites}
+        />
+      )}
+    </Box>
   );
 }

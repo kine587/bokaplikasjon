@@ -18,134 +18,133 @@ export default function BookCard({
   const title = book.title;
 
   return (
-    <div>
-      <Card
+    <Card
+      sx={{
+        bgcolor: "#201c1cff",
+        color: "white",
+        borderRadius: 2,
+        boxShadow: 3,
+        // width: "100%",
+        maxWidth: 250,
+        height: 400,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-evenly",
+        textAlign: "center",
+      }}
+    >
+      {cover && (
+        <CardMedia
+          component="img"
+          image={cover}
+          alt={title}
+          sx={{
+            height: 200,
+            width: "100%",
+            borderTopLeftRadius: 8,
+            borderTopRightRadius: 8,
+          }}
+        />
+      )}
+      <CardContent
         sx={{
-          bgcolor: "#201c1cff",
-          color: "white",
-          borderRadius: 2,
-          boxShadow: 3,
+          flexGrow: 1,
           width: 250,
-          height: 400,
+          padding: "8px 12px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "center",
           textAlign: "center",
+          px: 2,
+          py: 1,
         }}
       >
-        {cover && (
-          <CardMedia
-            component="img"
-            image={cover}
-            alt={title}
-            sx={{
-              height: 200,
-              width: "100%",
-              borderTopLeftRadius: 8,
-              borderTopRightRadius: 8,
-            }}
-          />
-        )}
-        <CardContent
+        <Typography
+          variant="h6"
           sx={{
-            flexGrow: 1,
-            width: 250,
-            padding: "8px 12px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            px: 2,
-            py: 1,
+            fontSize: "1rem",
+            lineHeight: 1.2,
+            mb: 1,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
           }}
         >
-          <Typography
-            variant="h6"
-            sx={{
-              fontSize: "1rem",
-              lineHeight: 1.2,
-              mb: 1,
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              display: "-webkit-box",
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: "vertical",
-            }}
-          >
-            {title}
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{
-              color: "#bdbdbd",
-            }}
-          >
-            {book.authors?.length
-              ? book.authors.map((a) => a.name).join(", ")
-              : "unknown autor"}
-          </Typography>
-        </CardContent>
-        <Box
+          {title}
+        </Typography>
+        <Typography
+          variant="body2"
           sx={{
-            display: "flex",
-            gap: 2,
-            p: 2,
+            color: "#bdbdbd",
           }}
         >
+          {book.authors?.length
+            ? book.authors.map((a) => a.name).join(", ")
+            : "unknown autor"}
+        </Typography>
+      </CardContent>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 2,
+          p: 2,
+        }}
+      >
+        <Button
+          component={Link}
+          to={`/book/${book.id}`}
+          variant="contained"
+          size="small"
+          sx={{
+            bgcolor: "#9c3aa3ff",
+            color: "white",
+            "&:hover": { bgcolor: "#7c3188ff" },
+            textTransform: "none",
+            flex: 1,
+          }}
+        >
+          Details
+        </Button>
+        {onAddFavorite && (
           <Button
-            component={Link}
-            to={`/book/${book.id}`}
-            variant="contained"
+            variant="outlined"
             size="small"
+            onClick={() => onAddFavorite(book)}
+            disabled={isFavorite}
             sx={{
-              bgcolor: "#9c3aa3ff",
+              borderColor: isFavorite ? "#7c3188ff" : "#b944d0ff",
               color: "white",
-              "&:hover": { bgcolor: "#7c3188ff" },
+              "&hover": {
+                bgcolor: isFavorite ? "#7c3188ff" : "#b944d0ff",
+              },
               textTransform: "none",
               flex: 1,
             }}
           >
-            Details
+            {isFavorite ? "Added" : "Favorite"}
           </Button>
-          {onAddFavorite && (
-            <Button
-              variant="outlined"
-              size="small"
-              onClick={() => onAddFavorite(book)}
-              disabled={isFavorite}
-              sx={{
-                borderColor: isFavorite ? "#7c3188ff" : "#b944d0ff",
-                color: "white",
-                "&hover": {
-                  bgcolor: isFavorite ? "#7c3188ff" : "#b944d0ff",
-                },
-                textTransform: "none",
-                flex: 1,
-              }}
-            >
-              {isFavorite ? "Added" : "Favorite"}
-            </Button>
-          )}
-          {onRemoveFavorite && (
-            <Button
-              variant="outlined"
-              size="small"
-              onClick={() => onRemoveFavorite(book.id)}
-              sx={{
-                bgcolor: "#661267ff",
-                color: "white",
-                "&hover": { bgcolor: "#661267ff" },
-                textTransform: "none",
-                flex: 1,
-              }}
-            >
-              Remove
-            </Button>
-          )}
-        </Box>
-      </Card>
-    </div>
+        )}
+        {onRemoveFavorite && (
+          <Button
+            variant="outlined"
+            size="small"
+            onClick={() => onRemoveFavorite(book.id)}
+            sx={{
+              bgcolor: "#661267ff",
+              color: "white",
+              "&hover": { bgcolor: "#661267ff" },
+              textTransform: "none",
+              flex: 1,
+            }}
+          >
+            Remove
+          </Button>
+        )}
+      </Box>
+    </Card>
   );
 }

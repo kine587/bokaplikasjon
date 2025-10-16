@@ -40,8 +40,10 @@ export default function BookCard({
           image={cover}
           alt={title}
           sx={{
-            height: 200,
+            height: 250,
             width: "100%",
+            objectPosition: "top",
+            objectFit: "cover",
             borderTopLeftRadius: 8,
             borderTopRightRadius: 8,
           }}

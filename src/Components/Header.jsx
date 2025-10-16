@@ -8,10 +8,13 @@ import {
   Box,
   TextField,
   Button,
+  IconButton,
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
 export default function Header() {
   const [search, setSearch] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleSearch = (e) => {
@@ -21,6 +24,8 @@ export default function Header() {
       setSearch("");
     }
   };
+
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   return (
     <>
@@ -102,10 +107,19 @@ export default function Header() {
             >
               Favorites
             </Button>
+            <IconButton
+              onClick={toggleMenu}
+              sx={{
+                color: "#b944d0ff",
+                display: { xs: "flex", md: "none" },
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
           </Box>
           <Box
             sx={{
-              display: "flex",
+              display: { xs: "none", md: "flex" },
               justifyContent: "center",
               flexWrap: "wrap",
               gap: 2,
@@ -116,6 +130,20 @@ export default function Header() {
           </Box>
         </Toolbar>
       </AppBar>
+      {menuOpen && (
+        <Box
+          sx={{
+            display: { xs: "flex", md: "none" },
+            flexDirection: "column",
+            alignItems: "center",
+            bgcolor: "#0a0a0aff",
+            py: 2,
+            boxShadow: "0px 2px 8px rgba(0,0,0,0.4)",
+          }}
+        >
+          <CategoryMeny />
+        </Box>
+      )}
     </>
   );
 }

@@ -101,12 +101,10 @@ export default function BookCard({
             size="small"
             sx={{
               bgcolor: "#9c3aa3ff",
+              color: "white",
               "&:hover": { bgcolor: "#7c3188ff" },
-              borderRadius: "0 0 8px 8px",
-              fontSize: "0.75rem",
-              padding: "4px 10px",
-              minWidth: "auto",
-              mb: 1,
+              textTransform: "none",
+              flex: 1,
             }}
           >
             Details
@@ -118,9 +116,12 @@ export default function BookCard({
               onClick={() => onAddFavorite(book)}
               disabled={isFavorite}
               sx={{
-                borderColor: "#b944d0ff",
-                color: "#b944d0ff",
-                "&hover": { bgcolor: "#7c3188ff" },
+                borderColor: isFavorite ? "#7c3188ff" : "#b944d0ff",
+                color: "white",
+                "&hover": {
+                  bgcolor: isFavorite ? "#7c3188ff" : "#b944d0ff",
+                },
+                textTransform: "none",
                 flex: 1,
               }}
             >
@@ -133,9 +134,10 @@ export default function BookCard({
               size="small"
               onClick={() => onRemoveFavorite(book.id)}
               sx={{
-                bgcolor: "#b944d0ff",
+                bgcolor: "#661267ff",
                 color: "white",
-                "&hover": { bgcolor: "#b944d020" },
+                "&hover": { bgcolor: "#661267ff" },
+                textTransform: "none",
                 flex: 1,
               }}
             >

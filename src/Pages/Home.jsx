@@ -33,6 +33,10 @@ export default function Home() {
     loadBooks();
   }, [page, search]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [page]);
+
   function addFavorites(book) {
     const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
     if (!storedFavorites.some((b) => b.id === book.id)) {

@@ -2,13 +2,15 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { GetBooksByCategory } from "../ApiData/API";
 import BookList from "../Components/BookList";
-import { Box, Typography, CircularProgress } from "@mui/material";
+import { Box, Typography, CircularProgress, Pagination } from "@mui/material";
 
 export default function Category() {
   const { categoryName } = useParams();
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [favorite, setFavorites] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -19,8 +21,9 @@ export default function Category() {
     async function loadBooks() {
       try {
         setLoading(true);
-        const data = await GetBooksByCategory(categoryName.toLowerCase());
+        const data = await GetBooksByCategory(categoryName.toLowerCase(), page);
         setBooks(data.results);
+        setTotalPages(Math.ceil(data.count / 32));
       } catch (error) {
         console.error("failed to fetch category books:", error);
       } finally {
@@ -28,7 +31,11 @@ export default function Category() {
       }
     }
     loadBooks();
-  }, [categoryName]);
+  }, [categoryName, page]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [page]);
 
   function addFavorite(book) {
     const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -91,6 +98,23 @@ export default function Category() {
             />
           </Box>
         )}
+        <Box display="flex" justifyContent="center" mt={4}>
+          <Pagination
+            count={totalPages}
+            page={page}
+            onChange={(e, value) => setPage(value)}
+            color="primary"
+            sx={{
+              "& .MuiPaginationItem-root": {
+                color: "#b944d0ff",
+                "&.Mui-selected": {
+                  bgcolor: "#b944d0ff",
+                  color: "#fff",
+                },
+              },
+            }}
+          />
+        </Box>
       </Box>
     </>
   );

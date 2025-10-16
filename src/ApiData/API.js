@@ -12,8 +12,12 @@ export async function SearchBooks(search, page = 1) {
   return response.json();
 }
 
-export async function GetBooksByCategory(topic) {
-  const response = await fetch(`${API_URL}?topic=${encodeURIComponent(topic)}`);
+export async function GetBooksByCategory(topic, page = 1) {
+  const response = await fetch(
+    `${API_URL}?topic=${encodeURIComponent(topic)}&page=${page}`
+  );
+  if (!response.ok) throw new Error("Failed to fetch category books");
+
   return response.json();
 }
 
